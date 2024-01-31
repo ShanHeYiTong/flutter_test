@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_20240130/movie/contacts.dart';
+import 'package:flutter_application_20240130/movie/trends.dart';
 
 //导入信息页面
 import 'movie/list.dart';
@@ -124,29 +126,10 @@ class _MyHomePageState extends State<MyHomePage> {
           body: TabBarView(
             children: [
               MovieList(mt: 'in_xinxi'),
-              MovieList(mt: 'in_lianxiren'),
-              MovieList(mt: 'in_dongtai'),
+              ContactsList(),
+              Trends(),
             ],
           ),
-          // body: Center(
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[
-          //       const Text(
-          //         'test 20240130',
-          //       ),
-          //       Text(
-          //         '$_counter',
-          //         style: Theme.of(context).textTheme.headlineMedium,
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // floatingActionButton: FloatingActionButton(
-          //   onPressed: _incrementCounter,
-          //   tooltip: 'Increment',
-          //   child: const Icon(Icons.add),
-          // ),
         ));
   }
 }

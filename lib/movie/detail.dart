@@ -19,6 +19,7 @@ class _MovieDetailState extends State<MovieDetail> {
   final TextEditingController _controller = TextEditingController();
   final _channel = WebSocketChannel.connect(
     Uri.parse('wss://echo.websocket.events'),
+    // Uri.parse('wss://192.168.0.176:9100/'),
   );
 
   @override
@@ -32,22 +33,23 @@ class _MovieDetailState extends State<MovieDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            StreamBuilder(
+              stream: _channel.stream,
+              builder: (context, snapshot) {
+                return Text(snapshot.hasData ? '${snapshot.data}' : '');
+              },
+            ),
+            const SizedBox(height: 24),
             Form(
               child: TextFormField(
                 controller: _controller,
                 decoration: const InputDecoration(labelText: 'Send a message'),
               ),
             ),
-            const SizedBox(height: 24),
-            StreamBuilder(
-              stream: _channel.stream,
-              builder: (context, snapshot) {
-                return Text(snapshot.hasData ? '${snapshot.data}' : '');
-              },
-            )
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: _sendMessage,
         tooltip: 'Send message',
@@ -60,6 +62,7 @@ class _MovieDetailState extends State<MovieDetail> {
     if (_controller.text.isNotEmpty) {
       // print(_controller.text);
       _channel.sink.add(_controller.text);
+      _controller.text = '';
     }
   }
 
