@@ -71,7 +71,7 @@ class MovieListState extends State<MovieList>
               child: Row(
                 children: [
                   Image.network(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bfU1SLHj1h06z_IHYQOuR-mkRbswHKyQjw&usqp=CAU',
+                    'http://101.39.192.162:7000/game/69e883c3jw1e8qgp5bmzyj2050050aa8.jpg',
                     width: 130,
                     height: 180,
                     fit: BoxFit.cover,
@@ -98,6 +98,7 @@ class MovieListState extends State<MovieList>
   getMovieList() async {
     try {
       //发送get请求
+      // var response = await dio.get('http://192.168.0.176:9300/api/platform');
       var response = await dio.get('http://192.168.0.176:9300/api/platform');
       //处理数据
       // print(response);

@@ -1,5 +1,3 @@
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
 
 //导入信息页面
@@ -68,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   accountEmail: Text('2094089664@qq.com'),
                   currentAccountPicture: CircleAvatar(
                     backgroundImage: NetworkImage(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bfU1SLHj1h06z_IHYQOuR-mkRbswHKyQjw&usqp=CAU'),
+                        // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bfU1SLHj1h06z_IHYQOuR-mkRbswHKyQjw&usqp=CAU'
+                        'http://101.39.192.162:7000/game/69e883c3jw1e8qgp5bmzyj2050050aa8.jpg'),
                   ),
                   decoration: BoxDecoration(
                       //背景图片
