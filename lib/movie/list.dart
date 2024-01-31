@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_application_20240130/movie/detail.dart';
 
 class MovieList extends StatefulWidget {
   //固定写法
@@ -16,7 +17,8 @@ class MovieList extends StatefulWidget {
 }
 
 //有状态控件  就必须有状态管理类 来进行实现
-class MovieListState extends State<MovieList> {
+class MovieListState extends State<MovieList>
+    with AutomaticKeepAliveClientMixin {
   Dio dio = new Dio();
 
 // 默认显示第一页数据
@@ -27,6 +29,11 @@ class MovieListState extends State<MovieList> {
   var mlist = [];
 // 总数据条数，实现分页效果的
   var total = 0;
+
+//保持列表状态
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
   //控件在创建的时候 会执行 initState
   @override
@@ -46,7 +53,44 @@ class MovieListState extends State<MovieList> {
       itemCount: mlist.length,
       itemBuilder: (BuildContext ctx, int i) {
         var mitem = mlist[i];
-        return Text(mitem['title']);
+        return GestureDetector(
+          onTap: () => {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext ctx) {
+              return new MovieDetail(
+                id: mitem['id'],
+                title: mitem['title'],
+              );
+            }))
+          },
+          child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border(top: BorderSide(color: Colors.black12))),
+              child: Row(
+                children: [
+                  Image.network(
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bfU1SLHj1h06z_IHYQOuR-mkRbswHKyQjw&usqp=CAU',
+                    width: 130,
+                    height: 180,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    height: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('平台id:${mitem['id']}'),
+                        Text('平台名称:${mitem['title']}'),
+                      ],
+                    ),
+                  )
+                ],
+              )),
+        );
       },
     );
   }
@@ -56,8 +100,7 @@ class MovieListState extends State<MovieList> {
       //发送get请求
       var response = await dio.get('http://192.168.0.176:9300/api/platform');
       //处理数据
-      print(response);
-
+      // print(response);
       // //数据赋值 使用函数 SetState
       setState(() {
         mlist = response.data;
