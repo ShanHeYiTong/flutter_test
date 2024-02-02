@@ -64,7 +64,8 @@ class MovieListState extends State<MovieList>
             }))
           },
           child: Container(
-              height: 200,
+                padding: EdgeInsets.only(left: 10),
+              height: 50,
               decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border(top: BorderSide(color: Colors.black12))),
@@ -72,19 +73,19 @@ class MovieListState extends State<MovieList>
                 children: [
                   Image.network(
                     'http://101.39.192.162:7000/game/69e883c3jw1e8qgp5bmzyj2050050aa8.jpg',
-                    width: 130,
-                    height: 180,
+                    width: 32,
+                    height: 45,
                     fit: BoxFit.cover,
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 10),
-                    height: 200,
+                    height: 50,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text('平台id:${mitem['id']}'),
-                        Text('平台名称:${mitem['title']}'),
+                        Text('会话名称:${mitem['id']}'),
+                        Text('会话内容:${mitem['title']}'),
                       ],
                     ),
                   )

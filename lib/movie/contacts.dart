@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_20240130/movie/contacts_detail.dart';
 
 class ContactsList extends StatefulWidget {
   //固定写法
@@ -43,14 +44,14 @@ class ContactsListState extends State<ContactsList>
         var mitem = mlist[i];
         return GestureDetector(
           onTap: () => {
-            // Navigator.push(context,
-            // MaterialPageRoute(builder: (BuildContext ctx) {
-            //跳转的页面
-            // return new MovieDetail(
-            //   id: mitem['id'],
-            //   title: mitem['title'],
-            // );
-            // }))
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext ctx) {
+              //跳转的页面
+              return new ContactsDetail(
+                mt: mitem['title'],
+//               title: mitem['title'],
+              );
+            }))
           },
           child: Container(
               padding: EdgeInsets.only(left: 10),
