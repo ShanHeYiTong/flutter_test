@@ -43,13 +43,7 @@ class _MovieDetailState extends State<MovieDetail> {
           itemCount: data.length,
           itemBuilder: (context, index) {
             final message = data[index];
-            return
-                //  Container(
-                //   width: 32,
-                //   height: 45,
-                //   child: Image.asset('images/generate.jpg'),
-                // );
-                MessageBubble(message: message, child: Text(message.text));
+            return MessageBubble(message: message, child: Text(message.text));
           },
         ),
       ),
@@ -239,10 +233,12 @@ class Message {
   const Message({
     required this.owner,
     required this.text,
+    required this.avatarUrl, // 新增头像属性
   });
 
   final MessageOwner owner;
   final String text;
+  final String avatarUrl; // 新增头像属性
 
   bool get isMine => owner == MessageOwner.myself;
 }
@@ -253,9 +249,17 @@ class MessageGenerator {
     return List.unmodifiable(List<Message>.generate(count, (index) {
       return Message(
         owner: random.nextBool() ? MessageOwner.myself : MessageOwner.other,
-        text: _exampleData[random.nextInt(_exampleData.length)],
+        // text: _exampleData[random.nextInt(_exampleData.length)],
+        text: '雁门关',
+        avatarUrl: _generateRandomAvatarUrl(), // 生成随机头像URL
       );
     }));
+  }
+
+  static String _generateRandomAvatarUrl() {
+    // 在实际应用中，你可能有一个包含多个头像URL的列表，然后随机选择一个。
+    // 这里为了简化示例，使用一个固定的头像URL。
+    return 'http://101.39.192.162:7000/game/69e883c3jw1e8qgp5bmzyj2050050aa8.jpg';
   }
 
   static final _exampleData = [
@@ -286,5 +290,6 @@ class MessageGenerator {
     'Nunc in odio leo.',
     'Praesent placerat semper libero, ut aliquet dolor.',
     'Vestibulum elementum leo metus, vitae auctor lorem tincidunt ut.',
+    '三国演义',
   ];
 }

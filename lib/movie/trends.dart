@@ -31,62 +31,44 @@ class TrendsState extends State<Trends> with AutomaticKeepAliveClientMixin {
     getMovieList();
   }
 
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
+
 //渲染当前这个MovieList空间的ui结构
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('First Route'),
-      // ),
-      body: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return ListTile(
-              title: Text('朋友圈跳转'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PengYouQuan(),
-                  ),
-                );
-              });
-        },
-      ),
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: entries.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 50,
+          color: Colors.amber[colorCodes[index]],
+          child: Center(child: Text('Entry ${entries[index]}')),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
-    // return ListView(
-    //   padding: EdgeInsets.all(2),
-    //   children: [
-    //     ListTile(
-    //       trailing: Icon(Icons.feedback),
-    //       title: Text('朋友圈'),
-    //     ),
-    //     Divider(),
-    //     ListTile(
-    //       title: Text('直播'),
-    //       // trailing: Icon(Icons.settings),
-    //     ),
-    //     Divider(),
-    //     ListTile(
-    //       title: Text('扫一扫'),
-    //       // trailing: Icon(Icons.send),
-    //     ),
-    //     ListTile(
-    //       title: Text('摇一摇'),
-    //       // trailing: Icon(Icons.send),
-    //     ),
-    //     //分割线
-    //     Divider(),
-    //     ListTile(
-    //       title: Text('附近'),
-    //       // trailing: Icon(Icons.exit_to_app),
-    //     ),
-    //     Divider(),
-    //     ListTile(
-    //       title: Text('游戏'),
-    //       trailing: Icon(Icons.exit_to_app),
-    //     ),
-    //   ],
+
+    // return Scaffold(
+    //   // appBar: AppBar(
+    //   //   title: const Text('First Route'),
+    //   // ),
+    //   body: ListView.builder(
+    //     itemCount: 1,
+    //     itemBuilder: (context, index) {
+    //       return ListTile(
+    //           title: Text('朋友圈跳转'),
+    //           onTap: () {
+    //             Navigator.push(
+    //               context,
+    //               MaterialPageRoute(
+    //                 builder: (context) => PengYouQuan(),
+    //               ),
+    //             );
+    //           });
+    //     },
+    //   ),
     // );
   }
 

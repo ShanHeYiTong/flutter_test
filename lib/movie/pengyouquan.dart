@@ -48,7 +48,7 @@ class PengYouQuanState extends State<PengYouQuan>
           children: [
             UserAccountsDrawerHeader(
               accountName: Text("widget.mt"),
-              accountEmail: Text('2094089664@qq.com'),
+              accountEmail: Text('20940896'),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: NetworkImage(
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bfU1SLHj1h06z_IHYQOuR-mkRbswHKyQjw&usqp=CAU'),

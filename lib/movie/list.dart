@@ -46,9 +46,7 @@ class MovieListState extends State<MovieList>
 //渲染当前这个MovieList空间的ui结构
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     // return Text('这是信息页面----' + widget.mt);
-
     return ListView.builder(
       itemCount: mlist.length,
       itemBuilder: (BuildContext ctx, int i) {
@@ -58,13 +56,15 @@ class MovieListState extends State<MovieList>
             Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext ctx) {
               return new MovieDetail(
+                // id: mitem['id'],
+                // title: mitem['title'],
                 id: mitem['id'],
-                title: mitem['title'],
+                title: mitem['key'],
               );
             }))
           },
           child: Container(
-                padding: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: 10),
               height: 50,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -72,10 +72,11 @@ class MovieListState extends State<MovieList>
               child: Row(
                 children: [
                   Image.network(
-                    'http://101.39.192.162:7000/game/69e883c3jw1e8qgp5bmzyj2050050aa8.jpg',
+                    // 'http://101.39.192.162:7000/game/69e883c3jw1e8qgp5bmzyj2050050aa8.jpg',
+                    'images/generate.jpg',
                     width: 32,
                     height: 45,
-                    fit: BoxFit.cover,
+                    // fit: BoxFit.cover,
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 10),
@@ -84,8 +85,9 @@ class MovieListState extends State<MovieList>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text('会话名称:${mitem['id']}'),
-                        Text('会话内容:${mitem['title']}'),
+                        // Text('会话名称:${mitem['id']}'),
+                        // Text('会话内容:${mitem['title']}'),
+                        Text('会话内容:${mitem['key']}'),
                       ],
                     ),
                   )
@@ -99,13 +101,14 @@ class MovieListState extends State<MovieList>
   getMovieList() async {
     try {
       //发送get请求
+      var response =
+          await dio.get('http://192.168.0.176:9100/api/chart?page=1&limit=10');
       // var response = await dio.get('http://192.168.0.176:9300/api/platform');
-      var response = await dio.get('http://192.168.0.176:9300/api/platform');
       //处理数据
       // print(response);
       // //数据赋值 使用函数 SetState
       setState(() {
-        mlist = response.data;
+        mlist = response.data['list'];
       });
     } catch (error) {
       print('Error fetching data: $error');
